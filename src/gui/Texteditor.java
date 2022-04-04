@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -39,7 +40,7 @@ public class Texteditor extends JFrame implements ActionListener {
 
 	private JLabel headline;
 
-	private JButton save, select;
+	private JButton save, select, exit;
 
 	private GridBagConstraints constraints;
 
@@ -69,6 +70,7 @@ public class Texteditor extends JFrame implements ActionListener {
 		this.setSize(Settings.WIDTH, Settings.HEIGHT);
 		this.setLayout(new GridBagLayout());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setUndecorated(true);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.contentPane = new GradientPanel(Settings.MENU_BACKGROUND_COLOR_1, Settings.MENU_BACKGROUND_COLOR_2);
@@ -102,6 +104,26 @@ public class Texteditor extends JFrame implements ActionListener {
 		save.setFont(new Font("Arial", Font.BOLD, 40));
 		save.addActionListener(this);
 		contentPane.add(save, constraints);
+
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.insets = new Insets(-780, 0, 0, -900);
+
+		exit = new JButton("Exit");
+		exit.setFocusable(false);
+		exit.setPreferredSize(new Dimension(Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT));
+		exit.setHorizontalAlignment(SwingConstants.CENTER);
+		exit.setForeground(Color.BLACK);
+		exit.setBackground(new Color(0, 0, 0, 0));
+		exit.setContentAreaFilled(false);
+		exit.setBorder(new RoundedBorder(25));
+		exit.setFont(new Font("Arial", Font.BOLD, 40));
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+			}
+		});
+		contentPane.add(exit, constraints);
 
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -160,6 +182,7 @@ public class Texteditor extends JFrame implements ActionListener {
 		this.setSize(Settings.WIDTH, Settings.HEIGHT);
 		this.setLayout(new GridBagLayout());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setUndecorated(true);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.contentPane = new GradientPanel(Settings.MENU_BACKGROUND_COLOR_1, Settings.MENU_BACKGROUND_COLOR_2);
@@ -193,6 +216,26 @@ public class Texteditor extends JFrame implements ActionListener {
 		save.setFont(new Font("Arial", Font.BOLD, 40));
 		save.addActionListener(this);
 		contentPane.add(save, constraints);
+
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.insets = new Insets(-780, 0, 0, -900);
+
+		exit = new JButton("Exit");
+		exit.setFocusable(false);
+		exit.setPreferredSize(new Dimension(Settings.BUTTON_WIDTH, Settings.BUTTON_HEIGHT));
+		exit.setHorizontalAlignment(SwingConstants.CENTER);
+		exit.setForeground(Color.BLACK);
+		exit.setBackground(new Color(0, 0, 0, 0));
+		exit.setContentAreaFilled(false);
+		exit.setBorder(new RoundedBorder(25));
+		exit.setFont(new Font("Arial", Font.BOLD, 40));
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				closeWindow();
+			}
+		});
+		contentPane.add(exit, constraints);
 
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -299,6 +342,11 @@ public class Texteditor extends JFrame implements ActionListener {
 			}
 		}
 
+	}
+
+	private void closeWindow(){
+		WindowEvent closingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closingEvent);
 	}
 
 }
